@@ -1,0 +1,35 @@
+# Render Blueprint - one-click deploy for the free tier.
+#
+# In Render: New > Blueprint > connect this repo. It reads this file, so there
+# is nothing to configure by hand.
+#
+# Why the Node runtime and not the Dockerfile: the free plan builds Node
+# services faster, and better-sqlite3 has a prebuilt Linux binary so there is
+# no native compile step. The Dockerfile is still there for hosts that want it.
+
+services:
+  - type: web
+    name: ajaia-docs
+    runtime: node
+    plan: free
+    # --include=dev is NOT optional. Render sets NODE_ENV=production during the
+    # build, which makes npm skip devDependencies - and this build needs two of
+    # them: typescript (next build) and tsx (the seed script). Without the flag
+    # the deploy fails at "Cannot find module 'typescript'".
+    #
+    # Seeding at BUILD time matters too: the build output is baked into the
+    # running instance, so the demo accounts exist the moment it boots.
+    buildCommand: npm install --include=dev && npm run build && npm run seed
+    startCommand: npm start
+    envVars:
+      # Signs the session cookie. Render generates a strong value once and
+      # keeps it, so sessions survive restarts.
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: NODE_VERSION
+        value: 20.17.0
+      # Lives on the instance disk. Persists while the instance is alive;
+      # resets on redeploy or when the free instance sleeps. Fine for a demo -
+      # attach a Render Disk and repoint this for durability.
+      - key: DATABASE_PATH
+        value: ./data/app.db

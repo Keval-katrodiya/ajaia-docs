@@ -1,0 +1,4 @@
+Raw thoughts, no formatting.
+
+Each blank line starts a new paragraph.
+A single newline stays inside the same one.

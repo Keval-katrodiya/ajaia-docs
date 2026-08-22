@@ -1,0 +1,93 @@
+AJAIA DOCS - WALKTHROUGH VIDEO
+Keval Katrodiya | keval.katrodiyas@gmail.com
+
+
+VIDEO URL
+=========
+
+    >>> PASTE YOUR UNLISTED LOOM OR YOUTUBE LINK HERE <<<
+
+
+Make sure the link is set to "anyone with the link can view" before submitting.
+
+
+-------------------------------------------------------------------------------
+RECORDING SCRIPT (3-5 minutes)
+-------------------------------------------------------------------------------
+
+Have two browser windows open before you start: one normal (Keval), one
+private/incognito (Priya). That is what makes the sharing demo land in one take
+instead of three.
+
+Run "npm run seed:reset" first so the data is clean on camera.
+
+
+0:00 - 0:20   WHAT IT IS
+              "A lightweight collaborative document editor. I prioritised depth
+              in three areas - editing, file import, and sharing that is actually
+              enforced - over shallow coverage of everything Google Docs does."
+
+0:20 - 1:00   THE MAIN FLOW
+              - Sign in as Keval. Point out the two sections: Your documents vs
+                Shared with you, and the role badge on the shared cards.
+              - New document. Type a heading, some bold and underlined text, a
+                bulleted list.
+              - Point at the save indicator: Unsaved -> Saving -> All changes saved.
+              - Refresh the page. Formatting is still there.
+
+1:00 - 1:50   FILE IMPORT  (the strongest single feature - give it time)
+              - Import a file -> samples/quarterly-report.docx
+              - Show that it arrives as a real document: headings are headings,
+                bullets are bullets, underline survived.
+              - Say the line: "Mammoth drops underline by default. I only found
+                that by importing a real Word file and diffing the marks - it is
+                in the AI workflow note as one of two bugs that were invisible
+                from reading the code."
+              - Open an existing doc -> Import -> Add to the end, with a .md file.
+
+1:50 - 3:00   SHARING
+              - Share -> priya@ajaia.test -> Can view.
+              - Switch to the private window, sign in as Priya. It is under
+                Shared with you. Open it: toolbar disabled, "View only" badge.
+              - Back as Keval: change her to Can edit.
+              - Priya refreshes and types. It saves.
+              - Say the line: "The disabled toolbar is a convenience. The API
+                refuses a viewer's write independently - there is a test for it,
+                and I verified it with curl."
+
+3:00 - 3:40   WHAT I DEPRIORITISED (do not skip this - it is scored)
+              - Real-time cursors: needs a CRDT and websockets. Instead the app
+                DETECTS a concurrent save and tells you, rather than silently
+                overwriting a colleague. Demo it if you have time: have Priya
+                save, then have Keval's stale tab save -> conflict banner.
+              - Comments, images, tables, links, version history - named in the
+                README with reasons, not left unmentioned.
+              - "Version history is what I would build first with another hour."
+
+3:40 - 4:20   KEY IMPLEMENTATION DECISIONS
+              - Documents are stored as ProseMirror JSON, not HTML. That means
+                validation is a node whitelist, so a shared document cannot carry
+                a script into a collaborator's browser.
+              - SQLite so the whole thing runs in two commands - but all SQL is
+                in two files, so moving to Postgres touches nothing else.
+              - Permissions are one pure module with no database, which is why
+                the whole 4x6 access matrix is unit-tested.
+
+4:20 - 5:00   HOW AI SUPPORTED THE WORK
+              - Claude Code wrote the volume: the HTML-to-ProseMirror converter,
+                test scaffolding, the docx fixture generator.
+              - I kept the decisions: scope cuts, the permission matrix, the
+                concurrency strategy.
+              - I rejected several suggestions - storing HTML, using Prisma and
+                Postgres, mocking the repository in tests.
+              - Close on: "Both real bugs were found by running it, not reading
+                it. That is the habit that matters."
+
+
+-------------------------------------------------------------------------------
+TIPS
+-------------------------------------------------------------------------------
+
+- Zoom the browser to about 125%. Toolbar icons are small at native size.
+- Do not narrate the code. Show the product; mention the decision behind it.
+- If you run long, cut the second import demo (append) - not the sharing section.
