@@ -6,24 +6,20 @@
 
 ---
 
-## ⚠️ Two items you must fill in before sending this
+## Links
 
-These cannot be produced from the repo alone. **Do not submit without them.**
+| | |
+|---|---|
+| **Live product** | **https://ajaia-docs-ite6.onrender.com** |
+| **Walkthrough video** | **https://www.loom.com/share/f30745f43b54422aa017f2ccf5d8ee1b** |
+| **Source** | https://drive.google.com/drive/folders/18Ptncojl_F_g62noX-n9P_dHEItIC9Ct?usp=sharing |
 
-| Item | Status | What to do |
-|---|---|---|
-| **Live product URL** | ⬜ **TODO** | Push to GitHub → Render → **New → Blueprint**. The included [`render.yaml`](render.yaml) configures everything; free plan, no card. Full steps in [README → Deploying](README.md#deploying) |
-| **Walkthrough video** | ⬜ **TODO** | Record 3–5 min, paste the unlisted link into `WALKTHROUGH_VIDEO.txt` (a script is already in that file) |
+**Sign-in needs no credentials** — click a demo name on the sign-in screen. Details
+in [Reviewing it in 5 minutes](#reviewing-it-in-5-minutes) below.
 
-> **Live URL:** `_______________________________________`
-> **Video URL:** `_______________________________________`
-
-**Before you send the link:** open it yourself a minute beforehand. Render's free
-plan sleeps after ~15 minutes idle, and a sleeping instance takes ~30–60 seconds
-to answer the first request. Waking it first means the reviewer's first click is
-instant.
-
-Everything else in this checklist is done.
+> **A note on the live link:** it runs on Render's free plan, which sleeps after
+> ~15 minutes idle. If your first request takes ~30–60 seconds, that is the
+> instance waking up, not the app being slow — every request after it is instant.
 
 ---
 
@@ -107,12 +103,12 @@ Everything the brief asked for, end to end.
 | Owned vs shared distinction | ✅ | Separate sections, owner avatar, role badge |
 | Persistence | ✅ | SQLite; survives refresh and restart |
 | Setup + run instructions | ✅ | README |
-| Deployment | ⚠️ | Dockerfile + instructions ready; **URL still to be filled in above** |
+| Deployment | ✅ | Live on Render (free plan) via the included `render.yaml` blueprint |
 | Validation + error handling | ✅ | Zod + a schema whitelist + one error envelope; messages written for humans |
 | Automated test | ✅ | 62 tests, `npm test`, ~1s |
 | Architecture note | ✅ | `ARCHITECTURE.md` |
 | AI workflow note | ✅ | `AI_WORKFLOW.md` |
-| Walkthrough video | ⬜ | **To record** — script in `WALKTHROUGH_VIDEO.txt` |
+| Walkthrough video | ✅ | 3–5 min Loom, linked above and in `WALKTHROUGH_VIDEO.txt` |
 
 **Beyond the brief** (cheap, so included): export to Markdown / HTML / plain text,
 role-based permissions rather than on/off access, concurrent-save conflict
